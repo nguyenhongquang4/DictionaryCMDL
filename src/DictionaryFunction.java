@@ -4,6 +4,7 @@ import java.io.InputStreamReader;
 import java.util.Scanner;
 import java.util.List;
 public class DictionaryFunction extends DictionaryManagement {
+
     public static void importDictionary(DictionaryManagement dm, Dictionary dictionary) {
         dm.insertFromFile(dictionary);
     }
@@ -12,16 +13,26 @@ public class DictionaryFunction extends DictionaryManagement {
         DictionaryCommandline.showAllWord(dictionary);
     }
 
+    public static void menu() {
+        System.out.println("0. Exit");
+        System.out.println("1. Add a new word");
+        System.out.println("2. Delete a word");
+        System.out.println("3. Update a new word");
+        System.out.println("4. Print the dictionary");
+        System.out.println("5. Look up a word");
+        System.out.println("6. Import the dictionary");
+        System.out.println("7. Search a word");
+        System.out.println("8. Export the dictionary");
+    }
+
     public static void main(String[] args) throws IOException {
         DictionaryManagement dm = new DictionaryManagement();
         Dictionary d = new Dictionary();
         Scanner sc = new Scanner(System.in);
-
-        System.out.print("Enter number of step: ");
-        int n = sc.nextInt();
-        for (int i = 0; i < n; i++) {
-           System.out.print("Enter your choice: ");
-           int choice = sc.nextInt();
+        menu();
+        while(true) {
+            System.out.print("Enter your choice: ");
+            int choice = sc.nextInt();
            switch (choice) {
                /**
                 * Exit
@@ -69,11 +80,13 @@ public class DictionaryFunction extends DictionaryManagement {
                 * Print the dictionary
                 */
                case 4 -> dictionaryBasic(d);
+               /**
+                * look up a word
+                */
                case 5 -> {
                    System.out.print("Enter the word: ");
                    String eWords = sc.next();
                    dm.dictionaryLookup(eWords, d);
-
                }
                /**
                 * import the dictionary data from file
